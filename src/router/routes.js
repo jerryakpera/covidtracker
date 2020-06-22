@@ -9,7 +9,12 @@ const routes = [{
         path: '/country/:countryName',
         component: () => import("pages/PageCountry.vue"),
         props: true
-      }
+      },
+      {
+        path: '/stats',
+        component: () => import("pages/PageGlobal.vue"),
+        props: true
+      },
     ]
   },
 
