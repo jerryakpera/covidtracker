@@ -10,8 +10,7 @@ const countryDetailAxios = axios.create({
 });
 
 const state = {
-  tempCountries: [
-    {
+  tempCountries: [{
       Country: "Afghanistan",
       CountryCode: "AF",
       Slug: "afghanistan",
@@ -179,14 +178,16 @@ const state = {
 };
 
 const getters = {
-  countries: () => state.tempCountries,
+  countries: () => state.countries,
   globalStats: () => state.globalStats,
   country: () => state.country,
   countryDetails: () => state.countryDetails
 };
 
 const actions = {
-  fetchAllCountries({ commit }) {
+  fetchAllCountries({
+    commit
+  }) {
     return new Promise((resolve, reject) => {
       countriesAxios
         .get("/summary")
@@ -205,7 +206,9 @@ const actions = {
         });
     });
   },
-  fetchSingleCountry({ commit }, countryName) {
+  fetchSingleCountry({
+    commit
+  }, countryName) {
     return new Promise((resolve, reject) => {
       countriesAxios
         .get(`/dayone/country/${countryName}`)
@@ -221,7 +224,9 @@ const actions = {
         });
     });
   },
-  fetchCountryDetails({ commit }, countryName) {
+  fetchCountryDetails({
+    commit
+  }, countryName) {
     return new Promise((resolve, reject) => {
       countryDetailAxios
         .get(`/${countryName}`)
@@ -235,7 +240,9 @@ const actions = {
         });
     });
   },
-  setCountry({ commit }, country) {
+  setCountry({
+    commit
+  }, country) {
     commit("setCountry", country);
   }
 };

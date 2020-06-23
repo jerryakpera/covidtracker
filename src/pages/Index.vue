@@ -99,7 +99,7 @@ export default {
     }
   },
   created() {
-    // this.getAllCountries();
+    this.getAllCountries();
     this.casesSort();
   }
 };
