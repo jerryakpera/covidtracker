@@ -12,25 +12,16 @@
         />
 
         <q-toolbar-title>
-          COVID-19 Tracker
-          <q-btn flat dense round icon="home" aria-label="Home" to="/" />
+          <q-btn to="/">COVID-19 Tracker</q-btn>
+          <!-- <q-btn flat dense round icon="home" aria-label="Home" to="/" /> -->
         </q-toolbar-title>
       </q-toolbar>
     </q-header>
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      content-class="bg-grey-1"
-      :width="250"
-      overlay
-    >
+    <q-drawer v-model="leftDrawerOpen" content-class="bg-grey-1" :width="250" overlay>
       <q-scroll-area class="fit">
         <q-list padding class="menu-list">
-          <EssentialLink
-            v-for="link in essentialLinks"
-            :key="link.title"
-            v-bind="link"
-          />
+          <EssentialLink v-for="link in essentialLinks" :key="link.title" v-bind="link" />
         </q-list>
       </q-scroll-area>
     </q-drawer>
@@ -63,9 +54,15 @@ export default {
         },
         {
           title: "Global",
-          caption: "Global statistics",
+          caption: "Worldwide stats",
           icon: "bar_chart",
           link: "/stats"
+        },
+        {
+          title: "Information",
+          caption: "How it spreads, prevention & symptoms ",
+          icon: "info",
+          link: "/info"
         }
       ]
     };

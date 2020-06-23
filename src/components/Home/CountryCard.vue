@@ -1,7 +1,7 @@
 <template>
-  <q-card class="my-card q-pa-md" square flat bordered>
+  <q-card class="my-card q-pa-xs" square flat bordered>
     <q-card-section class="q-pa-xs">
-      <div class="row items-center no-wrap">
+      <div class="row items-center no-wrap q-pa-none">
         <div class="col">
           <span
             v-if="countriesLength <= 25"
@@ -11,7 +11,7 @@
 
           <span v-else class="flag-icon" :class="'flag-icon-' + country.CountryCode.toLowerCase()"></span>
 
-          <div class="text-h6">{{ country.Country }}</div>
+          <div class="text-h5 text-weight-medium">{{ country.Country }}</div>
         </div>
 
         <div class="col-auto">
@@ -30,7 +30,7 @@
     <q-card-section horizontal>
       <q-card-section class="col-4 bg-primary text-white text-center">
         <div class="text-subtitle2">CASES</div>
-        <div class="text-h6">{{ numberWithCommas(country.TotalConfirmed) }}</div>
+        <div class="text-weight-bold">{{ numberWithCommas(country.TotalConfirmed) }}</div>
         <div class="text-body2">+ {{ numberWithCommas(country.NewConfirmed) }} new</div>
       </q-card-section>
 
@@ -42,7 +42,7 @@
 
       <q-card-section class="col-4 bg-negative text-white text-center">
         <div class="text-subtitle2">DEATHS</div>
-        <div class="text-h6">{{ numberWithCommas(country.TotalDeaths) }}</div>
+        <div class="text-weight-bold">{{ numberWithCommas(country.TotalDeaths) }}</div>
         <div class="text-body2">+ {{ numberWithCommas(country.NewDeaths) }} new</div>
       </q-card-section>
     </q-card-section>
@@ -88,6 +88,17 @@ export default {
     border: 1px solid #eee;
     &.big {
       font-size: 2.3em;
+    }
+  }
+}
+@media (max-width: 400px) {
+  .my-card {
+    .text-subtitle2 {
+      font-size: 8px;
+    }
+
+    .text-weight-bold {
+      font-size: 12px;
     }
   }
 }

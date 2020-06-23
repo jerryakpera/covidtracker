@@ -7,7 +7,7 @@
       size="58px"
       :thickness="0.25"
       color="white"
-      track-color="grey-10"
+      track-color="grey-6"
       class="q-ma-md"
     >
       {{ value * 1 }}%

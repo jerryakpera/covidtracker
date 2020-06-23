@@ -201,7 +201,6 @@ const actions = {
           resolve();
         })
         .catch(err => {
-          console.log(err.err);
           reject(err);
         });
     });
@@ -221,22 +220,6 @@ const actions = {
           reject({
             err
           });
-        });
-    });
-  },
-  fetchCountryDetails({
-    commit
-  }, countryName) {
-    return new Promise((resolve, reject) => {
-      countryDetailAxios
-        .get(`/${countryName}`)
-        .then(response => {
-          commit("setCountryDetails", response.data[0]);
-
-          resolve();
-        })
-        .catch(err => {
-          reject("Oops! Something went wrong.");
         });
     });
   },
@@ -278,15 +261,6 @@ const mutations = {
     ).toFixed(1);
 
     Object.assign(state.country.details, countryObj);
-  },
-  setCountryDetails(state, details) {
-    const countryDetails = {
-      name: details.name,
-      capital: details.capital,
-      flag: details.flag,
-      population: details.population
-    };
-    Object.assign(state.country.info, countryDetails);
   }
 };
 

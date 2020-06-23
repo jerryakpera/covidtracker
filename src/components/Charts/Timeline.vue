@@ -1,6 +1,6 @@
 <template>
   <q-card flat bordered square>
-    <!-- <cardheader title="Country Incedence Timeline" color="dark" /> -->
+    <cardheader title="Country Incedence Timeline" color="dark" />
     <q-card-section>
       <q-timeline color="primary" :layout="layout">
         <q-scroll-area
@@ -16,13 +16,13 @@
           >
             <div class="row">
               <div class="col-6">
-                <div class="text-h6 text-primary">
+                <div class="text-subtitle2 text-primary">
                   New cases: {{ numberWithCommas(incedence.Confirmed) }}
                 </div>
-                <div class="text-h6 text-positive">
+                <div class="text-subtitle2 text-positive">
                   New recovered: {{ numberWithCommas(incedence.Recovered) }}
                 </div>
-                <div class="text-h6 text-negative">
+                <div class="text-subtitle2 text-negative">
                   New deaths: {{ numberWithCommas(incedence.Deaths) }}
                 </div>
               </div>

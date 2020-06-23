@@ -15,6 +15,11 @@ const routes = [{
         component: () => import("pages/PageGlobal.vue"),
         props: true
       },
+      {
+        path: '/info',
+        component: () => import("pages/PageInfo.vue"),
+        props: true
+      },
     ]
   },
 

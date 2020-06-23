@@ -6,11 +6,14 @@
         class="flag-icon big"
         :class="'flag-icon-' + country.details.CountryCode.toLowerCase()"
       ></span>
+      <div class="text-h5 q-mt-sm">
+        {{ country.details.Country }}
+      </div>
       <div class="text-subtitle2 q-mt-sm">
         <span class="text-negative">
-          Population:
+          Confirmed Cases:
         </span>
-        {{ numberWithCommas(country.info.population) }}
+        {{ numberWithCommas(country.details.TotalConfirmed) }}
       </div>
       <div class="text-subtitle2 q-mt-sm">
         <span class="text-negative">

@@ -1,8 +1,17 @@
 <template>
   <q-page>
-    <div class="row absolute-center">
-      <h1>Global Pages</h1>
-    </div>
+    <q-card class="my-card" flat square>
+      <q-card-section class="bg-black text-white">
+        <div class="text-h6 text-center">Worldwide Covid-19 Stats</div>
+      </q-card-section>
+      <q-card-section>
+        <div class="row">
+          <div class="q-pa-xs col-xs-12 col-sm-6 col-md-4" v-for="card in cards" :key="card.title">
+            <globalcard :card="card" />
+          </div>
+        </div>
+      </q-card-section>
+    </q-card>
   </q-page>
 </template>
 
@@ -10,41 +19,70 @@
 import { mapActions, mapGetters } from "vuex";
 export default {
   data: () => ({
-    loading1: false
+    loading: false,
+    cards: []
   }),
-  props: {
-    countryName: {
-      type: String
-    }
-  },
   computed: {
-    ...mapGetters("countries", ["country", "countryDetails"])
+    ...mapGetters("countries", ["globalStats"])
   },
   components: {
-    countrydetailsbox: () =>
-      import("../components/Country/CountryDetailsBox.vue"),
-    countrycases: () => import("../components/Country/CountryCases.vue"),
-    countryrates: () => import("../components/Country/CountryRates.vue"),
-    loading: () => import("../components/Universal/Elements/Loading"),
-    timeline: () => import("../components/Charts/Timeline")
+    globalcard: () => import("../components/Global/GlobalCard.vue")
   },
   methods: {
-    ...mapActions("countries", ["fetchSingleCountry", "fetchCountryDetails"]),
-    getCountryDetails() {
-      this.loading1 = true;
-      this.fetchSingleCountry(this.countryName)
+    ...mapActions("countries", ["fetchAllCountries"]),
+    getAllCountries() {
+      this.showLoading();
+      this.fetchAllCountries()
         .then(() => {
-          this.fetchCountryDetails(this.countryName)
-            .then(() => {
-              this.loading1 = false;
-            })
-            .catch(err => {
-              console.log(1, err);
-            });
+          this.processGlobalStats();
+          this.hideLoading();
         })
         .catch(err => {
-          console.log(0, err);
+          if (err != "undefined") this.triggerNegative(err);
+          this.hideLoading();
+          return;
         });
+    },
+    processGlobalStats() {
+      const newCases = {
+        title: "New Cases",
+        number: this.globalStats.NewConfirmed,
+        color: "primary"
+      };
+      const newRecovered = {
+        title: "New Recovered",
+        number: this.globalStats.NewRecovered,
+        color: "positive"
+      };
+      const newDeaths = {
+        title: "New Deaths",
+        number: this.globalStats.NewDeaths,
+        color: "negative"
+      };
+      const totalCases = {
+        title: "Total Cases",
+        number: this.globalStats.TotalConfirmed,
+        color: "primary"
+      };
+      const totalRecovered = {
+        title: "Total Recovered",
+        number: this.globalStats.TotalRecovered,
+        color: "positive"
+      };
+      const totalDeaths = {
+        title: "Total Deaths",
+        number: this.globalStats.TotalDeaths,
+        color: "negative"
+      };
+
+      this.cards = [
+        newCases,
+        newRecovered,
+        newDeaths,
+        totalCases,
+        totalRecovered,
+        totalDeaths
+      ];
     },
     showLoading() {
       this.loading = true;
@@ -54,22 +92,15 @@ export default {
       this.loading = false;
       this.$q.loading.hide();
     },
-    refreshCountrt() {
-      this.getCountryDetails();
-    },
     triggerNegative(message) {
       this.$q.notify({
         type: "negative",
         message: message
       });
-    },
-    goBack() {
-      this.$router.push("/");
     }
   },
   created() {
-    if (!this.country.details.CountryCode) this.$router.push("/");
-    this.getCountryDetails();
+    this.getAllCountries();
   }
 };
 </script>
