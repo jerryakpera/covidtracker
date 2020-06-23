@@ -9,7 +9,7 @@ export default {
   data: () => ({
     cases: [
       {
-        label: "Cases",
+        label: "CASES BREAKDOWN",
         children: []
       }
     ]

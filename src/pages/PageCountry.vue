@@ -6,27 +6,20 @@
     <div class="row absolute-center">
       <loading v-if="loading1" color="primary" />
     </div>
-    <q-card flat square v-if="!loading1" bordered class="q-pa-sm">
-      <!-- <q-card-section class="bg-dark text-white">
-        <q-btn flat round color="white" icon="arrow_back" @click="goBack" />
-        {{ country.details.Country }}
-        <span class="text-subtitle1">({{ country.info.capital }})</span>
-      </q-card-section>-->
-      <q-card-section class="q-pa-none">
-        <div class="row q-pa-none">
-          <div class="q-pa-xs col-xs-12 col-sm-12 col-md-3">
-            <countrydetailsbox :country="country" />
-            <tree :country="country.details" />
-          </div>
-          <div class="q-pa-xs col-xs-12 col-sm-12 col-md-3">
-            <countryrates :country="country.details" />
-          </div>
-          <div class="q-pa-xs col-xs-12 col-sm-12 col-md-6">
-            <timeline :cases="country.cases.cases" />
-          </div>
+    <div class="row">
+      <div class="q-pa-xs col-xs-12 col-sm-12 col-md-3">
+        <div class="column">
+          <countrydetailsbox :country="country" />
+          <tree :country="country.details" />
         </div>
-      </q-card-section>
-    </q-card>
+      </div>
+      <div class="q-pa-xs col-xs-12 col-sm-12 col-md-3">
+        <countryrates :country="country.details" />
+      </div>
+      <div class="q-pa-xs col-xs-12 col-sm-12 col-md-6">
+        <timeline :cases="country.cases.cases" />
+      </div>
+    </div>
   </q-page>
 </template>
 
@@ -62,7 +55,8 @@ export default {
           this.loading1 = false;
         })
         .catch(err => {
-          console.log(0, err);
+          this.hideLoading();
+          this.triggerNegative("Well, this is embarrassing");
         });
     },
     showLoading() {
@@ -73,9 +67,6 @@ export default {
       this.loading = false;
       this.$q.loading.hide();
     },
-    refreshCountrt() {
-      this.getCountryDetails();
-    },
     triggerNegative(message) {
       this.$q.notify({
         type: "negative",
@@ -84,6 +75,12 @@ export default {
     },
     goBack() {
       this.$router.push("/");
+    },
+    triggerNegative(message) {
+      this.$q.notify({
+        type: "negative",
+        message: message
+      });
     }
   },
   created() {

@@ -1,24 +1,15 @@
 <template>
-  <q-card flat square>
+  <q-card square flat class="q-pa-none">
     <!-- <cardheader title="Country Info" color="primary" /> -->
     <q-card-section class="q-pa-sm">
-      <span
-        class="flag-icon big"
-        :class="'flag-icon-' + country.details.CountryCode.toLowerCase()"
-      ></span>
-      <div class="text-h5 q-mt-sm">
-        {{ country.details.Country }}
-      </div>
+      <span class="flag-icon big" :class="'flag-icon-' + country.details.CountryCode.toLowerCase()"></span>
+      <div class="text-h5 q-mt-sm">{{ country.details.Country }}</div>
       <div class="text-subtitle2 q-mt-sm">
-        <span class="text-negative">
-          Confirmed Cases:
-        </span>
+        <span class="text-negative">Confirmed Cases:</span>
         {{ numberWithCommas(country.details.TotalConfirmed) }}
       </div>
       <div class="text-subtitle2 q-mt-sm">
-        <span class="text-negative">
-          First Incedence:
-        </span>
+        <span class="text-negative">First Incedence:</span>
         {{ formatDate(country.cases.firstIncedenceDate) }}
       </div>
     </q-card-section>

@@ -1,5 +1,5 @@
 <template>
-  <q-card square flat class="q-pa-none" bordered>
+  <q-card square flat class="q-pa-none">
     <q-tabs
       v-model="tab"
       class="bg-white text-black"
@@ -24,11 +24,7 @@
       </q-tab-panel>
 
       <q-tab-panel name="rate" class="q-pa-none">
-        <ratesbox
-          topic="rate"
-          :recovery="country.recoveryRate"
-          :fatality="country.fatalityRate"
-        />
+        <ratesbox topic="rate" :recovery="country.recoveryRate" :fatality="country.fatalityRate" />
       </q-tab-panel>
     </q-tab-panels>
   </q-card>

@@ -15,6 +15,16 @@
           <q-btn to="/">COVID-19 Tracker</q-btn>
           <!-- <q-btn flat dense round icon="home" aria-label="Home" to="/" /> -->
         </q-toolbar-title>
+        <q-btn flat round dense icon="code" color="primary">
+          <q-menu>
+            <q-card class="my-card">
+              <q-card-section class="bg-primary text-white">
+                <div class="text-h6">Contact the Developer</div>
+                <div class="text-subtitle2">@jta11developer@gmail.com</div>
+              </q-card-section>
+            </q-card>
+          </q-menu>
+        </q-btn>
       </q-toolbar>
     </q-header>
 
@@ -63,6 +73,11 @@ export default {
           caption: "How it spreads, prevention & symptoms ",
           icon: "info",
           link: "/info"
+        },
+        {
+          title: "Contact the developer",
+          caption: "@jta11developer@gmail.com",
+          icon: "code"
         }
       ]
     };

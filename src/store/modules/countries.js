@@ -168,8 +168,16 @@ const state = {
     }
   ],
   countries: [],
-  globalStats: {},
+  globalStats: {
+    data: {},
+    date: ""
+  },
   country: {
+    details: {},
+    info: {},
+    cases: {}
+  },
+  singlecountry: {
     details: {},
     info: {},
     cases: {}
@@ -181,6 +189,7 @@ const getters = {
   countries: () => state.countries,
   globalStats: () => state.globalStats,
   country: () => state.country,
+  singlecountry: () => state.singlecountry,
   countryDetails: () => state.countryDetails
 };
 
@@ -192,9 +201,11 @@ const actions = {
       countriesAxios
         .get("/summary")
         .then(response => {
-          const globalStats = response.data.Global;
+          const globalStats = {
+            data: response.data.Global,
+            date: response.data.Date
+          };
           const countries = response.data.Countries;
-
           commit("setGlobalStats", globalStats);
           commit("setCountries", countries);
 
@@ -245,6 +256,7 @@ const mutations = {
     };
 
     Object.assign(state.country.cases, countryCases);
+    Object.assign(state.singlecountry.cases, countryCases);
   },
   setCountry(state, country) {
     const countryObj = {
@@ -260,6 +272,7 @@ const mutations = {
       100
     ).toFixed(1);
 
+    Object.assign(state.singlecountry.details, countryObj);
     Object.assign(state.country.details, countryObj);
   }
 };

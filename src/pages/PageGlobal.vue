@@ -1,8 +1,9 @@
 <template>
   <q-page>
     <q-card class="my-card" flat square>
-      <q-card-section class="bg-black text-white">
-        <div class="text-h6 text-center">Worldwide Covid-19 Stats</div>
+      <q-card-section class="bg-white text-black">
+        <div class="text-h3 text-center">Worldwide Covid-19 Stats</div>
+        <div class="text-h6 text-center text-grey-8">({{this.formatDate(this.globalStats.date)}})</div>
       </q-card-section>
       <q-card-section>
         <div class="row">
@@ -16,6 +17,7 @@
 </template>
 
 <script>
+const moment = require("moment");
 import { mapActions, mapGetters } from "vuex";
 export default {
   data: () => ({
@@ -46,32 +48,32 @@ export default {
     processGlobalStats() {
       const newCases = {
         title: "New Cases",
-        number: this.globalStats.NewConfirmed,
+        number: this.globalStats.data.NewConfirmed,
         color: "primary"
       };
       const newRecovered = {
         title: "New Recovered",
-        number: this.globalStats.NewRecovered,
+        number: this.globalStats.data.NewRecovered,
         color: "positive"
       };
       const newDeaths = {
         title: "New Deaths",
-        number: this.globalStats.NewDeaths,
+        number: this.globalStats.data.NewDeaths,
         color: "negative"
       };
       const totalCases = {
         title: "Total Cases",
-        number: this.globalStats.TotalConfirmed,
+        number: this.globalStats.data.TotalConfirmed,
         color: "primary"
       };
       const totalRecovered = {
         title: "Total Recovered",
-        number: this.globalStats.TotalRecovered,
+        number: this.globalStats.data.TotalRecovered,
         color: "positive"
       };
       const totalDeaths = {
         title: "Total Deaths",
-        number: this.globalStats.TotalDeaths,
+        number: this.globalStats.data.TotalDeaths,
         color: "negative"
       };
 
@@ -83,6 +85,9 @@ export default {
         totalRecovered,
         totalDeaths
       ];
+    },
+    formatDate(dateStr) {
+      return moment(dateStr).format("dddd, MMMM Do YYYY, h:mm:ss a");
     },
     showLoading() {
       this.loading = true;

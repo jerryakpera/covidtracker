@@ -4,13 +4,7 @@
       <!-- <searchbar /> -->
       <div class="row q-px-md q-pt-md">
         <div class="col-11">
-          <q-btn
-            flat
-            outline
-            color="secondary"
-            label="Sort by Cases"
-            @click="casesSort"
-          />
+          <q-btn flat outline color="secondary" label="Sort by Cases" @click="casesSort" />
         </div>
         <div class="col">
           <q-btn
@@ -37,11 +31,6 @@ export default {
       direction: "down"
     },
     loading: false,
-    weatherData: null,
-    lat: null,
-    lon: null,
-    apiUrl: "http://api.openweathermap.org/data/2.5/weather",
-    apiKey: "9affab1cf5f625b80c3c0255c482728d",
     originCountry: null,
     sortedCountries: null
   }),
@@ -63,7 +52,10 @@ export default {
           this.casesSort();
           this.hideLoading();
         })
-        .catch(err => this.triggerNegative(err));
+        .catch(err => {
+          this.hideLoading();
+          this.triggerNegative("Well, this is embarrassing");
+        });
     },
     casesSort() {
       const toSort = [...this.countries];
